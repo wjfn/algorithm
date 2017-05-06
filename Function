@@ -1,0 +1,23 @@
+#include<stdio.h>
+int f[55]={0};
+int fun(int n){
+	if(f[n]!=0)return f[n];
+	else if(n>2){
+		f[n]=fun(n-1)-2*fun(n-2)+3*fun(n-3);
+		return f[n];
+	}
+	return 1;
+}
+int main(){
+	int t,res;
+	scanf("%d",&t);
+	f[0]=f[1]=f[2]=1;
+	while(t){
+		int n;
+		scanf("%d",&n);
+		res=fun(n);
+		printf("%d\n",res);
+		t--;
+	}
+	return 0;
+}
