@@ -1,0 +1,40 @@
+#include<stdio.h>
+void swap(int *a,int *b)
+{
+	int t;
+	t=*a;
+	*a=*b;
+	*b=t;
+}
+int Partition(int a[],int p,int r){
+	int i=p,j=r+1,x=a[p];
+	while(1){
+		while(a[++i]<x && i<=r);
+		while(a[--j]>x && j>=p);
+		if(i>=j)break;
+		swap(a+i,a+j);
+	}
+	a[p]=a[j];
+	a[j]=x;
+	return j;
+}
+void QiuckSort(int a[],int p,int r){
+	if(p<r)
+	{int q=Partition(a,p,r);
+	QiuckSort(a,p,q-1);
+	QiuckSort(a,q+1,r);
+	}
+}
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n){
+	  int a[10],i;
+	  for(i=0;i<10;i++)scanf("%d",&a[i]);
+      QiuckSort(a,0,9);
+	  for(i=0;i<10;i++)
+		  printf(i==9?"%d\n":"%d ",a[i]);
+	  n--;
+	}
+  return 0;
+}
