@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>
+void swap(char *a,char *b){
+	char t;
+	t=*a;
+	*a=*b;
+	*b=t;
+}
+int main(){
+	char a[510],b[510];
+	while(scanf("%s %s",a,b)==2){
+		int c[1010]={0};
+		int la=strlen(a),lb=strlen(b),i=0,j,k;
+		j=la-1,k=lb-1;
+		//printf("%d %d\n",j,k);
+        while(i<j){swap(a+i,a+j);i++,j--;}
+		i=0;
+		while(i<k){swap(b+i,b+k);i++,k--;}
+		//printf("%s %s\n",a,b);
+		for(i=0;i<la;i++)
+			for(j=0;j<lb;j++)
+				c[i+j]+=(a[i]-'0')*(b[j]-'0'); 
+        i=0;
+        while(i<la+lb){
+			if(c[i]>=10){
+				c[i+1]+=c[i]/10;
+				c[i]%=10;
+			}
+			i++;
+		}
+		k=(c[la+lb-1]!=0)?la+lb-1:la+lb-2;
+		for(;k>=0;k--)printf("%d",c[k]);
+		printf("\n");
+	}
+	return 0;
+}
